@@ -2,12 +2,14 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import {  BehaviorSubject } from 'rxjs';
+import {MatSnackBar} from '@angular/material';
+
 @Injectable()
 export class AuthService {
   token: string;
   public user = new BehaviorSubject<string>('');
   data = this.user.asObservable();
-  constructor(private router: Router) {
+  constructor(private router: Router, private snack: MatSnackBar) {
    }
 
   signupUser(email: string, password: string) {
@@ -35,6 +37,9 @@ export class AuthService {
                   this.token = firebase.auth().currentUser.email;
                   localStorage.setItem('email', this.token);
                   this.user.next(this.token);
+                  this.snack.open('Hello! ' + this.token, '', {
+                    duration: 4000,
+                  });
                 }
             );
         }
@@ -46,9 +51,12 @@ export class AuthService {
 
   logout() {
     firebase.auth().signOut();
+    this.snack.open('Bye! ' + this.token, '', {
+      duration: 4000,
+    });
     this.token = null;
-    localStorage.removeItem('token');
-    this.user.next(this.token);
+    localStorage.removeItem('email');
+    this.user.next('Guest');
   }
 
   getToken() {
@@ -64,6 +72,19 @@ export class AuthService {
 
   isAuthenticated() {
     // return this.token != null;
-    this.user.next(localStorage.getItem('email'));
+    const user = localStorage.getItem('email');
+    this.token = user;
+    if (user) {
+      this.user.next(user);
+      this.snack.open('Hello! ' + user, '', {
+        duration: 4000,
+      });
+    } else {
+      this.user.next('Guest');
+      this.snack.open('Hello! ' + 'Guest', '', {
+        duration: 4000,
+      });
+    }
+
   }
 }

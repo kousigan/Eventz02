@@ -10,9 +10,10 @@ import { AuthService } from './main/pages/auth/userauth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Eventz02';
-
-  constructor(public snackBar: MatSnackBar, private auth: AuthService) {}
-
+  user;
+  constructor(public snackBar: MatSnackBar, private auth: AuthService) {
+    this.auth.user.subscribe(x => this.user = x);
+  }
   openSnackBar(message: string, action: string) {
     const snackBarRef = this.snackBar.open('Hello !, ' + message, action, {
 
@@ -38,17 +39,3 @@ export class AppComponent implements OnInit {
 }
 
 }
-
-@Component({
-  selector: 'app-snack',
-  template: `<span class="example-pizza-party">
-              Pizza party!!! 🍕
-            </span>`
-,
-  styles: [`
-    .example-pizza-party {
-      color: hotpink;
-    }
-  `],
-})
-export class PizzaPartyComponent {}
