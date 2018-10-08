@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../userauth.service";
+import { AuthService } from '../userauth.service';
 
 @Component({
   selector: 'app-reg-user',
@@ -7,13 +7,13 @@ import { AuthService } from "../userauth.service";
   styleUrls: ['./reg-user.component.css']
 })
 export class RegUserComponent implements OnInit {
-  username: string; 
+  username: string;
   password: string;
   constructor( private auth: AuthService) { }
 
   ngOnInit() {
   }
-  register(){
-    this.auth.signupUser(this.username,this.password);
+  register() {
+    this.auth.signupUser(this.username, this.password);
   }
 }

@@ -17,7 +17,11 @@ import { AuthService } from './pages/auth/userauth.service';
     AppRouterModule
   ],
   declarations: [NavComponent, LoginComponent, HomeComponent, RegUserComponent],
-  exports:[NavComponent,MaterialModule],
-  providers:[AuthService]
+  exports: [NavComponent, MaterialModule],
+  providers: [AuthService]
 })
-export class MainModule { }
+export class MainModule {
+  constructor(private auth: AuthService) {
+    this.auth.isAuthenticated();
+  }
+}

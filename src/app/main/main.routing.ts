@@ -6,9 +6,9 @@ import { HomeComponent } from './pages/events/home/home.component';
 import { RegUserComponent } from './pages/auth/reg-user/reg-user.component';
 
 
-let mainroute:Routes =[
+const mainroute: Routes = [
   { path: 'home', component: HomeComponent },
-  {path:'main',children:[
+  {path: 'main', children: [
     { path: 'login', component: LoginComponent },
     { path: 'newuser', component: RegUserComponent },
     { path: '', component: LoginComponent  }
@@ -17,11 +17,11 @@ let mainroute:Routes =[
 ];
 
 @NgModule({
-  imports:[
+  imports: [
     RouterModule.forChild(mainroute)
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
-export class AppRouterModule{}
+export class AppRouterModule {}

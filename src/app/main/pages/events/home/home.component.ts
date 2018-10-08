@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../auth/userauth.service";
+import { AuthService } from '../../auth/userauth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,23 +9,19 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   token;
-   
-  constructor( private auth: AuthService, private router:Router) { 
-  
+
+  constructor( private auth: AuthService, private router: Router) {
+
   }
-  
- ngAfterContentChecked(){
-   
- }
-  
-   
+
+
   ngOnInit() {
-    
+
   }
- 
-  logout(){
+
+  logout() {
     this.auth.logout();
-    this.router.navigate(['/main'])
+    this.router.navigate(['/main']);
   }
-  
+
 }
